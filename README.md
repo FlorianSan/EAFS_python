@@ -1,0 +1,1 @@
+ python -m pip install C:\\Users\\flsan\\PycharmProjects\\EAFS\\Communication\\ecal5-5.8.7-cp39-cp39-win_amd64.whl 

@@ -1,0 +1,40 @@
+# PyAircraftModel, a simplistc aircraft model for simulator based on ivy
+# Copyright (C) 2016 Mickael Royer <mickael.royer@enac.fr>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+import logging
+try:
+    import ivy.std_api as ivy
+except ImportError:
+    ivy = None
+
+IVY_CONNECTED = False
+
+
+def set_connected():
+    global IVY_CONNECTED
+    IVY_CONNECTED = True
+
+
+def require_ivy(func):
+    def new_func(*args, **kwargs):
+        if ivy is None or not IVY_CONNECTED:
+            logging.error("Ivy is not connected")
+            return
+        func(*args, **kwargs)
+
+    new_func.__name__ = func.__name__
+    return new_func

@@ -1,0 +1,391 @@
+DROP table IF EXISTS aeroport;
+DROP table IF EXISTS appr;
+DROP table IF EXISTS dme;
+DROP table IF EXISTS holdingpattern;
+DROP table IF EXISTS ils;
+DROP table IF EXISTS ilsdme;
+DROP table IF EXISTS ndb;
+DROP table IF EXISTS piste;
+DROP table IF EXISTS procedure;
+DROP table IF EXISTS route;
+DROP table IF EXISTS sid;
+DROP table IF EXISTS star;
+DROP table IF EXISTS tacan;
+DROP table IF EXISTS vor;
+DROP table IF EXISTS vordme;
+DROP table IF EXISTS waypoint;
+
+CREATE TABLE aeroport (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(4) NOT NULL,
+    ataiata VARYING CHARACTER(3) NOT NULL,
+    speedlimitaltitude VARYING CHARACTER(5) NOT NULL,
+    longestrwy VARYING CHARACTER(3) NOT NULL,
+    ifr VARYING CHARACTER(2) NOT NULL,
+    longrwy VARYING CHARACTER(1) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    elevation VARYING CHARACTER(5) NOT NULL,
+    speedlimit VARYING CHARACTER(3) NOT NULL,
+    recvhf VARYING CHARACTER(4) NOT NULL,
+    icaocodevhf VARYING CHARACTER(2) NOT NULL,
+    transaltitude VARYING CHARACTER(5) NOT NULL,
+    translevel VARYING CHARACTER(5) NOT NULL,
+    publicmilitaire VARYING CHARACTER(1) NOT NULL,
+    timezone VARYING CHARACTER(3) NOT NULL,
+    daytime VARYING CHARACTER(1) NOT NULL,
+    mtind VARYING CHARACTER(1) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    airportname VARYING CHARACTER(30) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    asind VARYING CHARACTER(1) DEFAULT '',
+    asarptident VARYING CHARACTER(4) DEFAULT '',
+    asicaocode VARYING CHARACTER(2) DEFAULT ''
+);
+
+CREATE TABLE appr (
+    runwayidentifiant VARYING CHARACTER(4) NOT NULL,
+    typeapproche VARYING CHARACTER(1) NOT NULL,
+    aeroportidentifiant VARYING CHARACTER(4) NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    premierpoint VARYING CHARACTER(5) NOT NULL,
+    balises TEXT NOT NULL
+);
+
+CREATE TABLE dme (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    frequence VARYING CHARACTER(5) NOT NULL,
+    frequenceprotection VARYING CHARACTER(3) NOT NULL,
+    biais VARYING CHARACTER(2) NOT NULL,
+    navaidmerit VARYING CHARACTER(1) NOT NULL,
+    facilitycharacteristics VARYING CHARACTER(5) DEFAULT ''
+);
+
+CREATE TABLE holdingpattern (
+    regioncode VARYING CHARACTER(4) NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    dupidentifier VARYING CHARACTER(2) NOT NULL,
+    fixidentifier VARYING CHARACTER(5) NOT NULL,
+    icaobalise VARYING CHARACTER(2) NOT NULL,
+    seccodebalise VARYING CHARACTER(1) NOT NULL,
+    subcodebalise VARYING CHARACTER(1) NOT NULL,
+    inboundholdingcourse VARYING CHARACTER(4) NOT NULL,
+    turndirection VARYING CHARACTER(1) NOT NULL,
+    leglength VARYING CHARACTER(3) NOT NULL,
+    legtime VARYING CHARACTER(2) NOT NULL,
+    minaltitude VARYING CHARACTER(5) NOT NULL,
+    maxaltitude VARYING CHARACTER(5) NOT NULL,
+    holdspeed VARYING CHARACTER(3) NOT NULL,
+    rnp VARYING CHARACTER(3) NOT NULL,
+    arcradius VARYING CHARACTER(6) NOT NULL,
+    name VARYING CHARACTER(25) NOT NULL,
+    typebalise TEXT,
+    rattachbalise INTEGER
+);
+
+CREATE TABLE ils (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    categorie VARYING CHARACTER(1) NOT NULL,
+    frequence VARYING CHARACTER(5) NOT NULL,
+    runwayidentifiant VARYING CHARACTER(5) NOT NULL,
+    locbearing VARYING CHARACTER(4) NOT NULL,
+    gslatitude VARYING CHARACTER(9) NOT NULL,
+    gslongitude VARYING CHARACTER(10) NOT NULL,
+    locfr VARYING CHARACTER(4) NOT NULL,
+    localiserpositionreference VARYING CHARACTER(1) NOT NULL,
+    gsthres VARYING CHARACTER(4) NOT NULL,
+    locwidth VARYING CHARACTER(4) NOT NULL,
+    gsangle VARYING CHARACTER(3) NOT NULL,
+    tch VARYING CHARACTER(2) NOT NULL,
+    gselev VARYING CHARACTER(5) NOT NULL,
+    facility VARYING CHARACTER(4) NOT NULL,
+    facilityicao VARYING CHARACTER(2) NOT NULL DEFAULT '',
+    facilitysec VARYING CHARACTER(1) NOT NULL  DEFAULT '',
+    facilitysub VARYING CHARACTER(1) NOT NULL  DEFAULT ''
+);
+
+CREATE TABLE ilsdme (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    frequence VARYING CHARACTER(5) NOT NULL,
+    frequenceprotection VARYING CHARACTER(3) NOT NULL,
+    biais VARYING CHARACTER(2) NOT NULL,
+    navaidmerit VARYING CHARACTER(1) NOT NULL,
+    facilitycharacteristics VARYING CHARACTER(5) DEFAULT ''
+);
+
+CREATE TABLE ndb (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    frequence VARYING CHARACTER(5) NOT NULL,
+    classndb VARYING CHARACTER(5) NOT NULL,
+    facilitycharacteristics VARYING CHARACTER(5) DEFAULT ''
+);
+
+CREATE TABLE piste (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiantrwy VARYING CHARACTER(5) NOT NULL,
+    identifiantaeroport VARYING CHARACTER(4) NOT NULL,
+    runwaylength VARYING CHARACTER(5) NOT NULL,
+    runwaybearing VARYING CHARACTER(4) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    runwaygrad VARYING CHARACTER(5) NOT NULL,
+    ellipsoidheight VARYING CHARACTER(6) NOT NULL,
+    lndgthreselev VARYING CHARACTER(5) NOT NULL,
+    dsplcdthr VARYING CHARACTER(4) NOT NULL,
+    tch VARYING CHARACTER(2) NOT NULL,
+    width VARYING CHARACTER(3) NOT NULL,
+    locglsident VARYING CHARACTER(4) NOT NULL,
+    categorieloc VARYING CHARACTER(4) NOT NULL,
+    stopway VARYING CHARACTER(4) NOT NULL,
+    seclocglsident VARYING CHARACTER(4) NOT NULL,
+    categoriesecloc VARYING CHARACTER(4) NOT NULL
+);
+
+CREATE TABLE procedure (
+    typeprocedure VARYING CHARACTER(4) NOT NULL,
+    aeroportidentifiant VARYING CHARACTER(4) NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(6) NOT NULL,
+    routetype VARYING CHARACTER(1) NOT NULL,
+    transitionidentifier VARYING CHARACTER(5) NOT NULL,
+    sequencenumber VARYING CHARACTER(3) NOT NULL,
+    fixidentifiant VARYING CHARACTER(5) NOT NULL,
+    icaocodefix VARYING CHARACTER(2) NOT NULL,
+    seccodefix VARYING CHARACTER(1) NOT NULL,
+    subcodefix VARYING CHARACTER(1) NOT NULL,
+    descriptioncode VARYING CHARACTER(4) NOT NULL,
+    turndirection VARYING CHARACTER(1) NOT NULL,
+    requirednavigationperformance VARYING CHARACTER(3) NOT NULL,
+    pathandterminaison VARYING CHARACTER(2) NOT NULL,
+    turndirectionvalide VARYING CHARACTER(1) NOT NULL,
+    recommendednavaid VARYING CHARACTER(4) NOT NULL,
+    icaocodenavaid VARYING CHARACTER(2) NOT NULL,
+    arcradius VARYING CHARACTER(6) NOT NULL,
+    theta VARYING CHARACTER(4) NOT NULL,
+    rho VARYING CHARACTER(4) NOT NULL,
+    magneticcruise VARYING CHARACTER(4) NOT NULL,
+    routedistance VARYING CHARACTER(4) NOT NULL,
+    seccoderoute VARYING CHARACTER(1) NOT NULL,
+    subcoderoute VARYING CHARACTER(1) NOT NULL,
+    altitudedescription VARYING CHARACTER(1) NOT NULL,
+    atc VARYING CHARACTER(1) NOT NULL,
+    altitude VARYING CHARACTER(5) NOT NULL,
+    altitude2 VARYING CHARACTER(5) NOT NULL,
+    transaltitude VARYING CHARACTER(5) NOT NULL,
+    speedlimit VARYING CHARACTER(3) NOT NULL,
+    verticalangle VARYING CHARACTER(4) NOT NULL,
+    centerfix VARYING CHARACTER(5) NOT NULL,
+    multicd VARYING CHARACTER(1) NOT NULL,
+    icaocodecenter VARYING CHARACTER(2) NOT NULL,
+    seccodecenter VARYING CHARACTER(1) NOT NULL,
+    subcodecenter VARYING CHARACTER(1) NOT NULL,
+    gnssfmsindicator VARYING CHARACTER(1) NOT NULL,
+    speedlmt VARYING CHARACTER(1) NOT NULL DEFAULT '',
+    routequal1 VARYING CHARACTER(1) NOT NULL DEFAULT '',
+    routequal2 VARYING CHARACTER(1) NOT NULL DEFAULT '',
+    startendindicator VARYING CHARACTER(1) DEFAULT '',
+    startenddate VARYING CHARACTER(11) DEFAULT '',
+    legdistance VARYING CHARACTER(4) DEFAULT ''
+);
+
+CREATE TABLE route (
+    routeidentifiant VARYING CHARACTER(6) NOT NULL,
+    sequencenumber VARYING CHARACTER(4) NOT NULL,
+    fixidentifiant VARYING CHARACTER(5) NOT NULL,
+    icaocodefix VARYING CHARACTER(2) NOT NULL,
+    seccodefix VARYING CHARACTER(1) NOT NULL,
+    subcodefix VARYING CHARACTER(1) NOT NULL,
+    descriptioncode VARYING CHARACTER(4) NOT NULL,
+    boundarycode VARYING CHARACTER(1) NOT NULL,
+    routetype VARYING CHARACTER(1) NOT NULL,
+    levelroute VARYING CHARACTER(1) NOT NULL,
+    direct VARYING CHARACTER(1) NOT NULL,
+    cruisetableidentifier VARYING CHARACTER(2) NOT NULL,
+    euindicator VARYING CHARACTER(1) NOT NULL,
+    receivervhf VARYING CHARACTER(4) NOT NULL,
+    icaocodevhf VARYING CHARACTER(2) NOT NULL,
+    requirednavigation VARYING CHARACTER(3) NOT NULL,
+    theta VARYING CHARACTER(4) NOT NULL,
+    rho VARYING CHARACTER(4) NOT NULL,
+    outboundmagneticcruise VARYING CHARACTER(4) NOT NULL,
+    routefromdistance VARYING CHARACTER(4) NOT NULL,
+    inboundmagneticcruise VARYING CHARACTER(4) NOT NULL,
+    minaltitude VARYING CHARACTER(5) NOT NULL,
+    minaltitude2 VARYING CHARACTER(5) NOT NULL,
+    maxaltitude VARYING CHARACTER(5) NOT NULL,
+    fixradius VARYING CHARACTER(4) NOT NULL  DEFAULT ''
+);
+
+CREATE TABLE sid (
+    identifiant VARYING CHARACTER(6) NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    aeroportidentifiant VARYING CHARACTER(4) NOT NULL,
+    runwayidentifiant VARYING CHARACTER(5),
+    lastfix VARYING CHARACTER(5),
+    firstfix VARYING CHARACTER(5),
+    latlong TEXT NOT NULL
+);
+
+CREATE TABLE star (
+    identifiant VARYING CHARACTER(6) NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    aeroportidentifiant VARYING CHARACTER(4) NOT NULL,
+    runwayidentifiant VARYING CHARACTER(5),
+    lastfix VARYING CHARACTER(5),
+    firstfix VARYING CHARACTER(5),
+    latlong TEXT NOT NULL
+);
+
+CREATE TABLE tacan (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    frequence VARYING CHARACTER(5) NOT NULL,
+    frequenceprotection VARYING CHARACTER(3) NOT NULL,
+    biais VARYING CHARACTER(2) NOT NULL,
+    navaidmerit VARYING CHARACTER(1) NOT NULL,
+    facilitycharacteristics VARYING CHARACTER(5) DEFAULT ''
+);
+
+CREATE TABLE vor (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    frequence VARYING CHARACTER(5) NOT NULL,
+    facilitycharacteristics VARYING CHARACTER(5) DEFAULT '',
+    frequenceprotection VARYING CHARACTER(3) NOT NULL,
+    navaidmerit VARYING CHARACTER(1) NOT NULL
+);
+
+CREATE TABLE vordme (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    identifiantdme VARYING CHARACTER(4) NOT NULL,
+    latitudedme VARYING CHARACTER(9) NOT NULL,
+    longitudedme VARYING CHARACTER(10) NOT NULL,
+    frequence VARYING CHARACTER(5) NOT NULL,
+    frequenceprotection VARYING CHARACTER(3) NOT NULL,
+    biais VARYING CHARACTER(2) NOT NULL,
+    navaidmerit VARYING CHARACTER(1) NOT NULL,
+    facilitycharacteristics VARYING CHARACTER(5) DEFAULT ''
+);
+
+CREATE TABLE waypoint (
+    id INTEGER PRIMARY KEY NOT NULL,
+    icaocode VARYING CHARACTER(2) NOT NULL,
+    identifiant VARYING CHARACTER(5) NOT NULL,
+    nom VARYING CHARACTER(30) NOT NULL,
+    latitude VARYING CHARACTER(9) NOT NULL,
+    longitude VARYING CHARACTER(10) NOT NULL,
+    aeroport VARYING CHARACTER(4) NOT NULL,
+    icaoaeroport VARYING CHARACTER(2) NOT NULL,
+    magneticvariation VARYING CHARACTER(5) NOT NULL,
+    datum VARYING CHARACTER(3) NOT NULL,
+    firidentifier VARYING CHARACTER(4) DEFAULT '',
+    uiridentifier VARYING CHARACTER(4) DEFAULT '',
+    seindicator VARYING CHARACTER(1) DEFAULT '',
+    sedate VARYING CHARACTER(11) DEFAULT '',
+    elevation VARYING CHARACTER(5) DEFAULT '',
+    type VARYING CHARACTER(3) NOT NULL,
+    usage VARYING CHARACTER(2) NOT NULL,
+    nameindicator VARYING CHARACTER(3) DEFAULT ''
+);
