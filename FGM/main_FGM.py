@@ -32,10 +32,11 @@ Datas = {"roll": 0,
 mutexRoll = mutexFpa = mutexHdg = mutexVp = mutexGS = Lock()
 mutexTime = mutexAPMode = mutexBaObjFMM = mutexHdgObj = mutexStatut = Lock()
 listApMode = ["Managed", "SelectedHeading"]
-in_test = False
+in_test = True
 statut = "deactivated"
 
 global startedFlight
+startedFlight = 0
 
 
 def run(test_mode=0):
@@ -54,6 +55,7 @@ def reboot(who):
         os.execv("/usr/bin/python3", (os.getcwd(), sys.argv[0], str(rebootNb + 1)))
     else:
         print("arret du prgm")
+        IvyStop()
         sys.exit()
 
 
@@ -136,15 +138,17 @@ def getBA_OBJ(self, *arg):
 # Recoit le time et calcule et envoit la commande de roulis et les facteurs de charges nx et nz au modèle
 def clock(self, *arg):
     global States, Datas
-    if in_test: print("clock", arg)
+    if in_test:
+        print("clock", arg)
+        print(startedFlight)
     if startedFlight == 1:
-
+        print(Datas)
         mutexTime.acquire()
         Datas["time"] = arg[0]
         mutexTime.release()
 
         # On travaille ici avec des variables locales pour des raisons de prog concurrente
-        localRoll = localFpa = localHdg = localTAS = localBaObjFMM = localBaObj = localAPMode = None
+        # localRoll = localFpa = localHdg = localTAS = localBaObjFMM = localBaObj = localAPMode = None
 
         mutexRoll.acquire()
         localRoll = Datas["roll"]
@@ -239,6 +243,7 @@ def testError(value, typeData, state):
 def startFlight(*arg):
 
     print("flight started")
+    global startedFlight
     startedFlight = 1
 
 

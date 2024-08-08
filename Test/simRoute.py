@@ -26,8 +26,12 @@ IvyInit(IVYAPPNAME,  # application name for Ivy
 
 # starting the bus
 IvyStart(ivybus)
-
-time.sleep(2)
+print("Ivy start")
+time.sleep(5)
+print("Send Ready")
 IvySendMsg('FR_Ready Time=147.4 Initial Flight Plan Ready')
 time.sleep(1)
+print("Send Msg")
 IvySendMsg('FR_InitFlightPlan Time=155.29999999999998 FROM=LFBO TO=LFPO ROUTE=DIRECT-FISTO, UY156-PERIG, UT210-TUDRA, UT158-BEVOL, DIRECT-STAR')
+
+IvyStop()

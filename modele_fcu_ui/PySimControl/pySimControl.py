@@ -32,6 +32,7 @@ from simcontrol.ivy_object import register_ivy_object
 from simcontrol.aircraft_model import register_aircraft_model
 from simcontrol.intruder_model import register_intruder_model
 from simcontrol.fcu.ap_object import register_ap1_object
+import time
 
 os.environ['QT_QUICK_CONTROLS_STYLE'] = 'Material'
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -51,6 +52,9 @@ def connect(app_name, ivy_bus, on_cx_proc):
 
 
 if __name__ == '__main__':
+
+    time.sleep(3)
+
     # parse options
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)

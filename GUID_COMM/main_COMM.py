@@ -28,11 +28,11 @@ Datas = {"roll": 0,
 
 mutexRoll = mutexFpa = mutexHdg = mutexVp = mutexGS = mutexTAE = mutexXTK = Lock()
 mutexTime = mutexBaObjFMM = mutexStatut = Lock()
-in_test = False
+in_test = True
 
 statut = "deactivated"
 global startedFlight
-
+startedFlight = 0
 
 def run(test_mode=0):
     global statut
@@ -124,7 +124,9 @@ def getTrackError(self, *arg):
 # Recoit le time et calcule et envoit la commande de roulis et les facteurs de charges nx et nz au modèle
 def clock(self, *arg):
     global States, Datas
-    if in_test: print("clock", arg)
+    if in_test:
+        print("clock", arg)
+        print(startedFlight)
     if startedFlight == 1:
         mutexTime.acquire()
         Datas["time"] = arg[0]
@@ -200,6 +202,7 @@ def testError(value, typeData, state):
 def startFlight(*arg):
 
     print("flight started")
+    global startedFlight
     startedFlight = 1
 
 

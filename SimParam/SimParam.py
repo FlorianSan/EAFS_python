@@ -35,7 +35,7 @@ def oncxproc(agent, connected):
     pass
 
 def ondieproc(agent, _id):
-    pass
+    print('received the order to die from %r with id = %d', agent, _id)
 
 if __name__ == "__main__":
     # initializing ivybus and isreadymsg
@@ -82,4 +82,6 @@ if __name__ == "__main__":
     # Start the application
     app = QApplication(sys.argv)
     ex = App()
+    exit(app.exec_())
     sys.exit(app.exec_())
+    IvyStop()
