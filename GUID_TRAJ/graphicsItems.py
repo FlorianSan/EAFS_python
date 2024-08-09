@@ -11,7 +11,7 @@ from navigationDisplay import *
 WP_WIDTH = 2.5
 WP_DP = WP_WIDTH/2.
 TP_WIDTH = 10
-TP_DP = TP_WIDTH/2.
+TP_DP = int(TP_WIDTH/2.)
 ASW = 2  # ASW stands for Arc Semi Width
 
 # Aicraft width
@@ -68,9 +68,9 @@ class QGraphicsArcItem(QtWidgets.QGraphicsEllipseItem):
     def paint(self, painter=QPainter(), style=None, widget=None):
         painter.setPen(TRAJ_PEN)
         if self.det < 0:
-            painter.drawArc(self.x, self.y, self.w, self.h, self.start_angle, self.span_angle)
+            painter.drawArc(int(self.x), int(self.y), int(self.w), int(self.h), int(self.start_angle), int(self.span_angle))
         else:
-            painter.drawArc(self.x, self.y, self.w, self.h, self.start_angle, -self.span_angle)
+            painter.drawArc(int(self.x), int(self.y), int(self.w), int(self.h), int(self.start_angle), int(-self.span_angle))
 
     def set_span_angle(self, alpha):
         self.span_angle = alpha * SP_ANGLE_COEFF
@@ -141,7 +141,7 @@ class QGraphicsTransitionPoints(QtWidgets.QGraphicsRectItem):
         painter.setTransform(QTransform(1, t.m12(), t.m13(), t.m21(), 1, t.m23(), t.m31(), t.m32(), t.m33()))
 
         painter.translate(-TP_DP, -TP_DP)  # translater de -TP_DP pour s'affranchir de l'épaisseur de l'item
-        painter.drawRect(self.x * m11, self.y * m22, TP_WIDTH, TP_WIDTH)
+        painter.drawRect(int(self.x * m11), int(self.y * m22), TP_WIDTH, TP_WIDTH)
         painter.restore()
 
 
@@ -216,31 +216,31 @@ class QGraphicsRoseItem(QtWidgets.QGraphicsItemGroup):
         # Large graduations
         for i in range(36):
             i = i / RAD2DEG * 10
-            a_x = self.centre[0] + np.sin(i) * self.w / 2
-            a_y = self.centre[1] + np.cos(i) * self.w / 2
-            b_x = a_x + np.sin(i) * LARGE_GRAD_LONG
-            b_y = a_y + np.cos(i) * LARGE_GRAD_LONG
-            l = painter.drawLine(a_x, a_y, b_x, b_y)
+            a_x = int(self.centre[0] + np.sin(i) * self.w / 2)
+            a_y = int(self.centre[1] + np.cos(i) * self.w / 2)
+            b_x = int(a_x + np.sin(i) * LARGE_GRAD_LONG)
+            b_y = int(a_y + np.cos(i) * LARGE_GRAD_LONG)
+            l = painter.drawLine(int(a_x), int(a_y), int(b_x), int(b_y))
             self.addToGroup(l)
 
         # Small graduations
         for i in range(1, 72, 2):
             i = i / RAD2DEG * 5
-            a_x = self.centre[0] + np.sin(i) * self.w / 2
-            a_y = self.centre[1] + np.cos(i) * self.w / 2
-            b_x = a_x + np.sin(i) * LARGE_GRAD_LONG / 2
-            b_y = a_y + np.cos(i) * LARGE_GRAD_LONG / 2
-            s = painter.drawLine(a_x, a_y, b_x, b_y)
+            a_x = int(self.centre[0] + np.sin(i) * self.w / 2)
+            a_y = int(self.centre[1] + np.cos(i) * self.w / 2)
+            b_x = int(a_x + np.sin(i) * LARGE_GRAD_LONG / 2)
+            b_y = int(a_y + np.cos(i) * LARGE_GRAD_LONG / 2)
+            s = painter.drawLine(int(a_x), int(a_y), int(b_x), int(b_y))
             self.addToGroup(s)
 
-        e = painter.drawEllipse(self.x, self.y, self.w, self.w)
+        e = painter.drawEllipse(int(self.x), int(self.y), int(self.w), int(self.w))
         self.addToGroup(e)
 
         if self.sim.mode == "SelectedHeading":  # affichage du heading selecté par un trait partant de l'avion si mode
             # sélecté
-            a_x2 = self.centre[0] + np.sin(float(self.sim.HDG_selected)/RAD2DEG)*self.w / 2
-            a_y2 = self.centre[1] + np.cos(float(self.sim.HDG_selected)/RAD2DEG) * self.w / 2
-            b_x2 = self.centre[0]
-            b_y2 = self.centre[1]
-            self.line = painter.drawLine(a_x2, a_y2, b_x2, b_y2)
+            a_x2 = int(self.centre[0] + np.sin(float(self.sim.HDG_selected)/RAD2DEG)*self.w / 2)
+            a_y2 = int(self.centre[1] + np.cos(float(self.sim.HDG_selected)/RAD2DEG) * self.w / 2)
+            b_x2 = int(self.centre[0])
+            b_y2 = int(self.centre[1])
+            self.line = painter.drawLine(int(a_x2), int(a_y2), int(b_x2), int(b_y2))
             self.addToGroup(self.line)

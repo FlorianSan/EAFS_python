@@ -14,6 +14,8 @@
       <sourceFolder url="file://$MODULE_DIR$/affichage" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/modele_fcu_ui" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Ivyprobe" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/venv2" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

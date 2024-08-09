@@ -32,7 +32,7 @@ Datas = {"roll": 0,
 mutexRoll = mutexFpa = mutexHdg = mutexVp = mutexGS = Lock()
 mutexTime = mutexAPMode = mutexBaObjFMM = mutexHdgObj = mutexStatut = Lock()
 listApMode = ["Managed", "SelectedHeading"]
-in_test = True
+in_test = False
 statut = "deactivated"
 
 global startedFlight

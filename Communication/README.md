@@ -1,1 +1,0 @@
-./protoc -I=C:\Users\flsan\PycharmProjects\EAFS\Communication --python_out=C:\Users\flsan\PycharmProjects\EAFS\Communication C:\Users\flsan\PycharmProjects\EAFS\Communication\message.proto

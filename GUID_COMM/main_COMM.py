@@ -28,7 +28,7 @@ Datas = {"roll": 0,
 
 mutexRoll = mutexFpa = mutexHdg = mutexVp = mutexGS = mutexTAE = mutexXTK = Lock()
 mutexTime = mutexBaObjFMM = mutexStatut = Lock()
-in_test = True
+in_test = False
 
 statut = "deactivated"
 global startedFlight

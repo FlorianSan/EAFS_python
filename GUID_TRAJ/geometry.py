@@ -93,7 +93,7 @@ class WayPoint(Point):
         Retourne les coordonnées (x,y) en mde la projection pseudo-Mercator. Pseudo-Mercator par rapport à Mercator
         prend en compte le cote elliptique de la Terre (si jamais on veut juste Mercator, remplacer a par R dans les
         formules) Merator/Pseudo-Mercator OK si base de donnée juste en Europe (pas trop de déformations)
-        /!\ formules pas ok quand latitude = 90° (au pole)"""
+        Attention formules pas ok quand latitude = 90° (au pole)"""
         x = A*self.long/RAD2DEG
         y = A*np.log(np.tan(np.pi/4+self.lat/2/RAD2DEG))
         return x/NM2M, y/NM2M
