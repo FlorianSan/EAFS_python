@@ -39,9 +39,12 @@ class App(QWidget):
         self.button.setEnabled(False)
         self.button.clicked.connect(self.on_click)
 
+        self.text_app_dep = QLabel()
+        self.text_app_dep.setText("Airport of departure")
         self.label = QLineEdit()
         self.label.editingFinished.connect(self.checkAirport)
-
+        hbox.addWidget(self.text_app_dep)
+        hbox.setSpacing(10)
         hbox.addWidget(self.label)
         hbox.setSpacing(20)
 
