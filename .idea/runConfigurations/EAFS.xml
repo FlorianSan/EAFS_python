@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EAFS" type="CompoundRunConfigurationType">
+    <toRun name="SimParam" type="PythonConfigurationType" />
+    <toRun name="affichage_commande" type="PythonConfigurationType" />
+    <toRun name="affichage_position" type="PythonConfigurationType" />
+    <toRun name="horizon_artificiel" type="PythonConfigurationType" />
+    <toRun name="ivyprobe" type="PythonConfigurationType" />
+    <toRun name="main_COMM" type="PythonConfigurationType" />
+    <toRun name="main_FGM" type="PythonConfigurationType" />
+    <toRun name="main_LEGS" type="PythonConfigurationType" />
+    <toRun name="main_SEQ" type="PythonConfigurationType" />
+    <toRun name="main_TRAJ" type="PythonConfigurationType" />
+    <toRun name="pyAircraftModel" type="PythonConfigurationType" />
+    <toRun name="pySimControl" type="PythonConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>
